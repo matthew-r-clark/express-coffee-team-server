@@ -1,55 +1,37 @@
 const db = require('./db_connection');
 const queries = require('./queries');
 
+function handleError(error) {
+  console.log('ERROR: ' + error);
+}
+
 module.exports = class Repo {
   getTopics(req, res) {
+    console.log('getTopics');
     let sql = queries.topics;
     
     db.any(sql)
-      .then(data => {
-        res.status(200)
-           .json(data);
-      }).catch(error => console.log('ERROR: ' + error + '\n' + sql));
+      .then(data => res.status(200).json(data))
+      .catch(handleError);
+  }
+
+  getTopicById(req, res) {
+    let sql = queries.topicById;
+    let topic_id = Number(req.params.id);
+
+    db.one(sql, [topic_id])
+      .then(data => res.status(200).json(data))
+      .catch(handleError);
   }
 
   getPostsForTopic(req, res) {
+    console.log('getPostsForTopics');
     let sql = queries.postsForTopic;
-    let topic = req.params.topic;
+    let topic_id = Number(req.params.id);
 
-    db.any(sql, [topic])
-      .then(data => {
-        let posts = {};
-
-        data.forEach(post => {
-          if (!post.thread_id) {
-            post.replies = [];
-            posts[post.id] = post;
-          } else {
-            posts[post.thread_id].replies.push(post);
-          }
-        });
-
-        res.status(200)
-           .json(Object.values(posts));
-      }).catch(error => console.log('ERROR: ' + error + '\n' + sql));
-  }
-
-  getRepliesForPost(id) {
-
-  }
-
-  select(sql, values=[]) {
-    let results;
-
-    db.any(sql, values)
-    .then(data => results = data)
-    .catch(error => console.log('error: ' + error));
-
-    return results;
-  }
-
-  insert(sql, values) {
-
+    db.any(sql, [topic_id])
+      .then(data => res.status(200).json(data))
+      .catch(handleError);
   }
 }
 
