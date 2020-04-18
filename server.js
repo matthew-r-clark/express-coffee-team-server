@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 8080;
 
-app.set('views', './views');
 app.use(express.static('public'));
 app.use(cors());
 
