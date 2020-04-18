@@ -27,7 +27,7 @@ module.exports = class Repo {
   getPostsForTopic(req, res) {
     console.log('getPostsForTopics');
     let sql = queries.postsForTopic;
-    let topic_id = Number(req.params.id);
+    let topic_id = Number(req.params.topic_id);
 
     db.any(sql, [topic_id])
       .then(data => res.status(200).json(data))

@@ -15,4 +15,4 @@ let db = new Repo();
 // ROUTES
 app.get('/api/GetForumPosts/topics', db.getTopics);
 app.get('/api/GetForumPosts/topics/:id', db.getTopicById);
-app.get('/api/GetForumPosts/posts/:topic', db.getPostsForTopic);
+app.get('/api/GetForumPosts/posts/:topic_id', db.getPostsForTopic);
