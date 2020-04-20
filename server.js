@@ -3,15 +3,15 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 8080;
 
-app.use(express.static('public'));
+app.use(express.static('javascripts'));
 app.use(cors());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-const Repo = require('./public/repo.js');
+const Repo = require('./javascripts/repo.js');
 let db = new Repo();
 
-// ROUTES
+// GetForumPosts
 app.get('/api/GetForumPosts/topics', db.getTopics);
 app.get('/api/GetForumPosts/topics/:id', db.getTopicById);
 app.get('/api/GetForumPosts/posts/:topic_id', db.getPostsForTopic);

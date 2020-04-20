@@ -1,3 +1,5 @@
+const configOptions = require('../setup/dbConfig.json');
+
 const initOptions = {
   connect(client, dc, useCount) {
     const cp = client.connectionParameters;
@@ -10,7 +12,8 @@ const initOptions = {
 };
 
 const pgp = require('pg-promise')(initOptions);
-const config = 'postgres://matt:9raptors@localhost:5432/coffeeteam_forum';
+
+const config = process.env.NODE_ENV ? configOptions.PROD_DB_STRING : configOptions.DEV_DB_STRING;
 const db = pgp(config);
 
 module.exports = db;
