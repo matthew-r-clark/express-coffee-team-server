@@ -1,4 +1,4 @@
-const configOptions = require('../setup/dbConfig.json');
+const dbConfig = require('../setup/dbConfig.json');
 
 const initOptions = {
   connect(client, dc, useCount) {
@@ -13,7 +13,7 @@ const initOptions = {
 
 const pgp = require('pg-promise')(initOptions);
 
-const config = process.env.NODE_ENV ? configOptions.PROD_DB_STRING : configOptions.DEV_DB_STRING;
+const config = process.env.NODE_ENV ? dbConfig.PROD_DB_STRING : dbConfig.DEV_DB_STRING;
 const db = pgp(config);
 
 module.exports = db;
