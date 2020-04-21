@@ -1,5 +1,3 @@
-const dbConfig = require('../setup/dbConfig.json');
-
 const initOptions = {
   connect(client, dc, useCount) {
     const cp = client.connectionParameters;
@@ -13,7 +11,6 @@ const initOptions = {
 
 const pgp = require('pg-promise')(initOptions);
 
-const config = process.env.DB_CONNECTION || dbConfig.DEV_DB_STRING;
-const db = pgp(config);
+const db = pgp(process.env.DATABASE_URL);
 
 module.exports = db;
