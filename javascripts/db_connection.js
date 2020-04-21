@@ -13,7 +13,7 @@ const initOptions = {
 
 const pgp = require('pg-promise')(initOptions);
 
-const config = process.env.NODE_ENV ? process.env.DATABASE_URL : dbConfig.DEV_DB_STRING;
+const config = process.env.DATABASE_URL || dbConfig.DEV_DB_STRING;
 const db = pgp(config);
 
 module.exports = db;
