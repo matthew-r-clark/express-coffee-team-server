@@ -7,7 +7,6 @@ function handleError(error) {
 
 module.exports = class Repo {
   getTopics(req, res) {
-    console.log('getTopics');
     let sql = queries.topics;
     
     db.any(sql)
