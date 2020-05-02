@@ -36,7 +36,7 @@ module.exports = class Repo {
     let sql = queries.search;
     let phrase = req.params.phrase;
 
-    db.any(sql, [phrase])
+    db.any(sql, [`%${phrase}%`])
       .then(data => res.status(200).json(data))
       .catch(handleError);
   }
