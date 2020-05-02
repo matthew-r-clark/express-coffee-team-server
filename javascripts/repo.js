@@ -24,11 +24,19 @@ module.exports = class Repo {
   }
 
   getPostsForTopic(req, res) {
-    console.log('getPostsForTopics');
     let sql = queries.postsForTopic;
     let topic_id = Number(req.params.topic_id);
 
     db.any(sql, [topic_id])
+      .then(data => res.status(200).json(data))
+      .catch(handleError);
+  }
+
+  getTopicsWithPhrase(req, res) {
+    let sql = queries.search;
+    let phrase = req.params.phrase;
+
+    db.any(sql, [phrase])
       .then(data => res.status(200).json(data))
       .catch(handleError);
   }
