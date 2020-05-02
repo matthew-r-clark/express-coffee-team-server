@@ -18,3 +18,6 @@ let db = new Repo();
 app.get('/api/GetForumPosts/topics', db.getTopics);
 app.get('/api/GetForumPosts/topics/:id', db.getTopicById);
 app.get('/api/GetForumPosts/posts/:topic_id', db.getPostsForTopic);
+
+// Search
+app.get('/api/GetForumPosts/search/:phrase', db.getTopicsWithPhrase);
